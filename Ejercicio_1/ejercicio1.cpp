@@ -112,6 +112,10 @@ void Tiempo::mostrarHoraFormato24(){
     if(uso_horario == "a.m." && horas == 12){
         horas = 0;
     }
+    if(horas > 23){
+        cout << "Error: La hora esta fuera de rango." << endl;
+        return;
+    }
     cout << setfill('0') << setw(2) << horas << "h, "
             << setfill('0') << setw(2) << minutos << "m, "
             << setfill('0') << setw(2) << segundos << "s" << endl;
