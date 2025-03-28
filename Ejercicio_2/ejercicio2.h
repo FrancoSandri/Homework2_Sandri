@@ -73,6 +73,11 @@ class Curso{
         A su vez, un Curso no puede existis sin Estudiantes, pero los Estudiantes si pueden vivir sin Curso.
         En caso de destruir un Curso, también se destruyen los Estudiantes que contiene.
         Pero en caso de destruir un Estudiante, los Cursos siguen existiendo.
+
+        Entonces puedo decir que es una relación de composición, ya que un Curso está compuesto por Estudiantes.
+        En este caso, la relación es de uno a muchos, ya que un Curso puede tener varios Estudiantes, pero un Estudiante 
+        solo puede pertenecer a un Curso.
+        
         */
 
 };
