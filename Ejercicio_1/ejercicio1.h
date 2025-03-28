@@ -25,8 +25,10 @@ class Tiempo {
         void setSegundo(int segundos);
         void setUsoHorario(std::string uso_horario);
 
-        void getHoraIndividual(std::string tipo_hora);
-        void setHoraIndividual(std::string tipo_hora, int valor);
+        void getHora();
+        void getMinuto();
+        void getSegundo();
+        void getUsoHorario();
 
         void mostrarTiempo();
         void mostrarHoraFormato24();
