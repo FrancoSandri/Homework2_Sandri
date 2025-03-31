@@ -10,7 +10,7 @@ Entero* Entero::suma(Numero* n) {
 }
 
 Entero* Entero::resta(Numero* n){
-    Entero* nEntero = dynamic_cast<Entero*>(n); //*>(n);
+    Entero* nEntero = dynamic_cast<Entero*>(n);
     if(nEntero){
         return new Entero(this->valor - nEntero->valor);
     }
