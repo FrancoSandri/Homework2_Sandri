@@ -19,24 +19,22 @@ class Entero : public Numero {
 private:
     int valor;
 public:
-    Entero(int valor) : valor(valor) {}
-    friend class Entero;
+    Entero(int valor) : valor(valor) {};
     Entero* suma(Numero* otro) override;
     Entero* resta(Numero* otro) override;
     Entero* multiplicacion(Numero* otro) override;
-    string toString() const override { return to_string(valor); }
+    string toString() const override;
 };
 
 class Real : public Numero {
 private:
     float valor;
 public:
-    Real(float valor) : valor(valor) {}
-    friend class Real;
+    Real(float valor) : valor(valor) {};
     Real* suma(Numero* otro) override;
     Real* resta(Numero* otro) override;
     Real* multiplicacion(Numero* otro) override;
-    string toString() const override { return to_string(valor); }
+    string toString() const override;
 };
 
 class Complejo : public Numero {
@@ -44,12 +42,11 @@ private:
     float real;
     float imaginario;
 public:
-    Complejo(float real, float imaginario) : real(real), imaginario(imaginario) {}
-    friend class Complejo;
+    Complejo(float real, float imaginario) : real(real), imaginario(imaginario) {};
     Complejo* suma(Numero* otro) override;
     Complejo* resta(Numero* otro) override;
     Complejo* multiplicacion(Numero* otro) override;
-    string toString() const override { return to_string(real) + " + " + to_string(imaginario) + "i"; }
+    string toString() const override;
 };
 
 #endif
