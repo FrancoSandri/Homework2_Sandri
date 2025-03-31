@@ -5,7 +5,11 @@ ostream& operator<<(ostream& os, const cuentaBanco& cuenta) {
     return os;
 };
 
-cuentaBanco::cuentaBanco(string nombreTitular, string tipoCuenta, double balance){};
+cuentaBanco::cuentaBanco(string nombreTitular, string tipoCuenta, double balance){
+    this->nombreTitular = nombreTitular;
+    this->tipoCuenta = tipoCuenta;
+    this->balance = balance;
+};
 
 void cuentaBanco::depositar(double dinero){
     balance += dinero;
@@ -32,16 +36,16 @@ void cajaDeAhorro::retirar(double dinero){
 }
 
 void cajaDeAhorro::realizarDescuento(){
-    if(contadorDeMuestras >= 2){
-        balance -= 20;
+    if(contadorDeMuestras > 2 && balance >= 20){
+        this->balance -= 20;
         cout << "Por hacer más de dos llamados a la informacion, se le descontó $20." << endl;
     }
 }
 
 void cajaDeAhorro::mostrarInfo(){
-    contadorDeMuestras+=1;
-    cout << *this;
+    this->contadorDeMuestras+=1;
     realizarDescuento();
+    cout << *this;
 }
 
 cuentaCorriente::cuentaCorriente(string nombreTitular, double balance): cuentaBanco(nombreTitular, "Cuenta Corriente", balance){};
@@ -53,12 +57,21 @@ void cuentaCorriente::retirar(double dinero){
     }
 };
 
-void cuentaCorriente::avisoSinDinero(const cajaDeAhorro& caja){
+void cuentaCorriente::avisoSinDinero(cajaDeAhorro* caja){
 
-    if(balance <= 0 && caja.balance <= 0){
+    if(balance <= 0 && caja->balance <= 0){
         cout << "No tenes saldo en la Cuenta Corriente ni en la caja de Ahorro." << endl;
     }
 
+}
+
+void cuentaCorriente::mostrarInfo(){
+    cout << *this;
+}
+
+void cuentaCorriente::mostrarInfo(cajaDeAhorro* caja){
+    cout << *this;
+    avisoSinDinero(caja);
 }
 
 int main(){
@@ -68,6 +81,7 @@ int main(){
 
     cout << "Ingrese su nombre: " << endl;
     cin >> titularCuenta;
+    cin.ignore();
 
     cout << "Ingrese el balance de la caja de ahorro: " << endl;
     cin >> balanceCaja;
@@ -89,8 +103,7 @@ int main(){
         cout << "3. Retirar dinero de Cuenta Corriente" << endl;
         cout << "4. Mostrar información de Caja de Ahorro" << endl;
         cout << "5. Mostrar información de Cuenta Corriente" << endl;
-        // cout << "6. Verificar si ambas cuentas están sin dinero" << endl;
-        cout << "7. Salir" << endl;
+        cout << "6. Salir" << endl;
         cout << "Ingrese una opción: ";
         cin >> opcion;
         
@@ -119,14 +132,10 @@ int main(){
                 break;
 
             case 5:
-                cuentaCorriente.mostrarInfo();
+                cuentaCorriente.mostrarInfo(&cuentaDeAhorro);
                 break;
 
-            // case 6:
-            //     cuentaCorriente.avisoSinDinero(cuentaDeAhorro);
-            //     break;
-
-            case 7:
+            case 6:
                 cout << "Saliendo del programa." << endl;
                 break;
 
@@ -134,7 +143,7 @@ int main(){
                 cout << "Opción invalida." << endl;
         }
 
-    } while (opcion != 7);
+    } while (opcion != 6);
 
     return 0;
 }

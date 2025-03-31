@@ -26,7 +26,7 @@ class cajaDeAhorro: public cuentaBanco{
         void mostrarInfo() override;
         friend class cuentaCorriente;
     private:
-        int contadorDeMuestras; 
+        int contadorDeMuestras = 0; 
 };
 
 class cuentaCorriente: public cuentaBanco{
@@ -34,7 +34,9 @@ class cuentaCorriente: public cuentaBanco{
         cuentaCorriente(string nombreTitular, double balance);
         void retirar(double) override;
         friend class cajaDeAhorro;
-        void avisoSinDinero(const cajaDeAhorro& caja); //en caso de que la cuenta no posea dinero
+        void avisoSinDinero(cajaDeAhorro* caja); //en caso de que la cuenta no posea dinero
+        void mostrarInfo() override;
+        void mostrarInfo(cajaDeAhorro* caja);
 };
 
 #endif
