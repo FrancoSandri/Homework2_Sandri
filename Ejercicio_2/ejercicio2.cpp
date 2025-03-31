@@ -109,7 +109,7 @@ int main(){
 
     do{
 
-    cout << "\n--- MENÚ ---\n";
+    cout << "\n Bienvenido al Curso, que desea hacer?\n";
     cout << "1. Inscribir estudiante\n";
     cout << "2. Mostrar estudiantes\n";
     cout << "3. Hacer copia del curso\n";
