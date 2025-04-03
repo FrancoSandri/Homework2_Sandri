@@ -18,28 +18,35 @@ class Estudiante{
     public:
         Estudiante(string nombre, int legajo);
         void agregarCurso(string nombre_curso, float nota_final);
+        void eliminarCurso(string nombreCurso);
         float calcularPromedioGeneral();
         string getNombre() const;
         int getLegajo() const;
+        vector <pair<string,float>> getCursos() const;
 };
 
 class Curso{
     private:
         vector <Estudiante*> estudiantes;
+        string nombreCurso;
         static const int MAX_ALUMNOS = 20;
 
     public: 
-        Curso();
-        Curso(const Curso& rht);
+        Curso(string nombreCurso);
+        Curso(const Curso& rht, string nombreCurso);
         ~Curso();
-        void inscribirAlumno(Estudiante* estudiante);
-        void desinscribirAlumno(int legajo);
-        bool estaInscripto(int legajo);
-        bool estaCompleto();
-        void mostrarEstudiantesOrdenados();
+
+        string getCurso();
+        void inscribirAlumno(Estudiante* estudiante, string nombreCurso, float notaFinal);
+        void desinscribirAlumno(int legajo, string nombreCurso);
+        bool estaInscripto(int legajo, string nombreCurso);
+        bool estaCompleto(string nombreCurso);
+        void mostrarEstudiantesOrdenados(string nombreCurso);
+        vector<Estudiante*> getEstudiantes();
+        
 
         friend ostream& operator<<(ostream& os, const Estudiante& estudiante);
-        friend bool operator<(const Estudiante& e1, const Estudiante& e2);
+        friend bool operator<(const Estudiante& estudiante1, const Estudiante& estudiante2);
 
 
         /*
