@@ -2,6 +2,7 @@
 #define EJERCICIO4_H
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ class cuentaCorriente: public cuentaBanco{
         void retirar(double) override;
         friend class cajaDeAhorro;
         void avisoSinDinero(cajaDeAhorro* caja); //en caso de que la cuenta no posea dinero
-        void mostrarInfo() override;
+        void mostrarInfo() override; //no encontré mejor solucion :)
         void mostrarInfo(cajaDeAhorro* caja);
 };
 

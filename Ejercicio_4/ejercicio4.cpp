@@ -80,8 +80,7 @@ int main(){
     double balanceCuenta;
 
     cout << "Ingrese su nombre: " << endl;
-    cin >> titularCuenta;
-    cin.ignore();
+    getline(cin, titularCuenta);
 
     cout << "Ingrese el balance de la caja de ahorro: " << endl;
     cin >> balanceCaja;
