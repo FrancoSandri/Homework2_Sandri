@@ -167,11 +167,8 @@ Curso::Curso(const Curso& rht, string nombreCurso) : nombreCurso(nombreCurso) {
     }
 }
 
-//funcion que destruye el curso, eliminando los estudiantes
+//funcion que destruye el curso, vaciando el vector de estudiantes
 Curso::~Curso() {
-    for (const auto& estudiante : estudiantes) {
-        delete estudiante;
-    }
     estudiantes.clear();
 }
 
@@ -189,7 +186,8 @@ int main() {
         cout << "6. Verificar si el curso está completo\n";
         cout << "7. Consultar el promedio del alumno\n";
         cout << "8. Crear una copia del curso\n";
-        cout << "9. Salir\n";
+        cout << "9. Eliminar curso\n";
+        cout << "10. Salir\n";
         cout << "Ingrese una opción: ";
         cin >> opcion;
         cin.ignore();
@@ -391,14 +389,36 @@ int main() {
                     }
                     break;
                 }
-            case 9:
+                case 9: {
+                    string nombreCurso;
+                    cout << "Ingrese el nombre del curso a eliminar: ";
+                    getline(cin, nombreCurso);
+                
+                    bool cursoEncontrado = false;
+                
+                    for (auto i = cursos.begin(); i != cursos.end(); i++) {
+                        if ((*i)->getCurso() == nombreCurso) {
+                            delete *i; 
+                            cursos.erase(i);
+                            cout << "Curso eliminado.\n";
+                            cursoEncontrado = true;
+                            break;
+                        }
+                    }
+                
+                    if (!cursoEncontrado) {
+                        cout << "El curso no existe.\n";
+                    }
+                    break;
+                }                
+            case 10:
                 cout << "Saliendo del programa.\n";
                 break;
             default:
                 cout << "Opción inválida.\n";
                 break;
         }
-    } while (opcion != 9);
+    } while (opcion != 10);
     
     for (Curso* curso : cursos) {
         curso->~Curso();
