@@ -3,6 +3,9 @@
 /*En el punto i, en vez de pedir nuevamente que pase los parametros fuera de rango, salgo del programa.*/
 
 void Tiempo::mostrarTiempo(){
+    /*
+        Muestro la hora con la funcion setfill.
+    */
     cout << setfill('0') << setw(2) << horas << "h, "
             << setfill('0') << setw(2) << minutos << "m, "
             << setfill('0') << setw(2) << segundos << "s "
@@ -60,22 +63,23 @@ Tiempo::Tiempo(int horas, int minutos, int segundos, string uso_horario) {
     this->uso_horario = uso_horario;
 };
 
+//funcion que muestra la hora
 void Tiempo::getHora(){
     cout << "La hora es: " << horas << endl;
 }
-
+//funcion que muestra los minutos
 void Tiempo::getMinuto(){
     cout << "Los minutos son: " << minutos<< endl;
 }
-
+//funcion que muestra los segundos
 void Tiempo::getSegundo(){
     cout << "Los segundos son: " << segundos << endl;
 }
-
+//funcion que muestra el uso horario
 void Tiempo::getUsoHorario(){
     cout << "El uso horario es: " << uso_horario << endl;
 }
-
+//funcion que modifica solo la hora
 void Tiempo::setHora(int horas){
     if(horas > 12){
         cout << "La hora no puede ser mayor a 24" << endl;
@@ -83,6 +87,7 @@ void Tiempo::setHora(int horas){
     };
     this->horas = horas;
 };
+//funcion que modifica solo los minutos
 void Tiempo::setMinuto(int minutos){
     if(minutos >= 60){
         cout << "Los minutos no pueden ser mayores a 60" << endl;
@@ -90,6 +95,7 @@ void Tiempo::setMinuto(int minutos){
     };
     this->minutos = minutos;
 };
+//funcion que modifica solo los segundos
 void Tiempo::setSegundo(int segundos){
     if(segundos >= 60){
         cout << "Los segundos no pueden ser mayores a 60" << endl;
@@ -97,6 +103,7 @@ void Tiempo::setSegundo(int segundos){
     };
     this->segundos = segundos;
 };
+//funcion que modifica solo el uso horario
 void Tiempo::setUsoHorario(string uso_horario){
     if(uso_horario != "a.m." && uso_horario != "p.m."){
         cout << "El uso horario solo puede ser a.m. o p.m." << endl;
@@ -105,6 +112,7 @@ void Tiempo::setUsoHorario(string uso_horario){
     this->uso_horario = uso_horario;
 };
 
+//funcion que muestra la hora en formato 24 horas
 void Tiempo::mostrarHoraFormato24(){
     if(uso_horario == "p.m." && horas != 12){
         horas += 12;

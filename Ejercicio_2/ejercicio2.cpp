@@ -1,25 +1,28 @@
 #include "ejercicio2.h"
 #include "ejercicio2.h"
 
+//sobrecargo el operador < para poder ordenar los estudiantes por nombre
 bool operator<(const Estudiante& e1, const Estudiante& e2) {
     return e1.getNombre() < e2.getNombre();
 }
-
+//sobrecargo el operador << para poder mostrar el estudiante por pantalla con el formato pedido
 ostream& operator<<(ostream& os, const Estudiante& e) {
     os << "Nombre completo: " << e.getNombre() << ", Legajo: " << e.getLegajo() << endl;
     return os;
 }
 
+//funcion que devuelve el nombre del estudiante
 string Estudiante::getNombre() const {
     return nombre;
 }
-
+//funcion que devuelve el legajo del estudiante
 int Estudiante::getLegajo() const {
     return legajo;
 }
-
+//función que inicializa el estudiante
 Estudiante::Estudiante(string nombre, int legajo) : nombre(nombre), legajo(legajo){}
 
+//funcion que agrega un curso al estudiante, recibe el nombre y la nota final y lo pushea al vector de cursos
 void Estudiante::agregarCurso(string nombre_curso, float nota_final){
     for (auto& curso : cursos) {
         if (curso.first == nombre_curso) {
@@ -30,10 +33,13 @@ void Estudiante::agregarCurso(string nombre_curso, float nota_final){
     cursos.push_back(make_pair(nombre_curso, nota_final));
 }
 
+//funcion que devuelve el vector de cursos del estudiante
 vector<pair<string, float>> Estudiante::getCursos() const {
     return cursos;
 }
 
+//funcion que devuelve el promedio general de un estudiante, recorre el vector de cursos y suma las notas finales, 
+//luego las divido por la cantidad de cursos.
 float Estudiante::calcularPromedioGeneral() {
     if (cursos.empty()) return 0.0;
     float suma = 0;
@@ -47,6 +53,7 @@ float Estudiante::calcularPromedioGeneral() {
     return (contadorDeCursos > 0) ? (suma / contadorDeCursos) : 0.0;
 }
 
+//funcion que elimina un curso del estudiante, recibe el nombre del curso y lo busca en el vector de cursos, si lo encuentra lo elimina
 void Estudiante::eliminarCurso(string nombreCurso) {
     auto it = remove_if(cursos.begin(), cursos.end(), [&](const pair<string, float>& curso) {
         return curso.first == nombreCurso;
@@ -57,13 +64,17 @@ void Estudiante::eliminarCurso(string nombreCurso) {
     }
 }
 
-
+//inicializo el curso
 Curso::Curso(string nombreCurso) : nombreCurso(nombreCurso) {}
 
+//funcion que devuelve el nombre del curso
 string Curso::getCurso(){
     return nombreCurso;
 }
 
+//funcion que inscribe a un estudiante en un curso
+//recibe un puntero a Estudiante, el nombre del curso y la nota final
+//pusheo el estudiante a la lista de estudiantes en el curso y agrego el curso al vector de cursos del estudiante
 void Curso::inscribirAlumno(Estudiante* estudiante, string nombreCurso, float notaFinal) {
     if (nombreCurso != this->nombreCurso) {
         cout << "El curso no existe." << endl;
@@ -82,6 +93,9 @@ void Curso::inscribirAlumno(Estudiante* estudiante, string nombreCurso, float no
     cout << "El estudiante fue inscrito correctamente." << endl;
 }
 
+//funcion que desinscribe a un estudiante de un curso
+//recibe el legado del estudiante, el nombre del curso y busca el estudiante en la lista de estudiantes del curso y lo desinscribe
+//a su vez elimina el curso del vector de cursos del estudiante
 void Curso::desinscribirAlumno(int legajo, string nombreCurso) {
     if (nombreCurso != this->nombreCurso) {
         cout << "El curso no existe." << endl;
@@ -105,7 +119,8 @@ void Curso::desinscribirAlumno(int legajo, string nombreCurso) {
     cout << "El estudiante fue desinscrito correctamente." << endl;
 }
 
-
+//funcion que verifica que un estudiante este inscripto en un curso
+//busca en la lista de estudiantes del curso y si encuentra el legajo devuelve true, sino false.
 bool Curso::estaInscripto(int legajo, string nombreCurso) {
     if (nombreCurso != this->nombreCurso) return false;
     for (const auto& estudiante : estudiantes) {
@@ -116,14 +131,17 @@ bool Curso::estaInscripto(int legajo, string nombreCurso) {
     return false;
 }
 
+//funcion que verifica si el curso esta completo, encuentra el nombre del curso y la cantidad de estudiantes es menor a MAX_ALUMNOS devuelve true
 bool Curso::estaCompleto(string nombreCurso) {
     return nombreCurso == this->nombreCurso && estudiantes.size() == MAX_ALUMNOS;
 }
 
+//funcion que devuelve el vector de estudiantes del curso
 vector<Estudiante*> Curso::getEstudiantes(){
     return estudiantes;
 }
 
+//funcion que muestra los estudiantes ordenados por nombre, usando el operador <
 void Curso::mostrarEstudiantesOrdenados(string nombreCurso) {
     if (nombreCurso != this->nombreCurso) {
         cout << "El curso no existe." << endl;
@@ -142,12 +160,14 @@ void Curso::mostrarEstudiantesOrdenados(string nombreCurso) {
     cout << endl;
 }
 
+//funcion que crea una copia del curso usando deep copy
 Curso::Curso(const Curso& rht, string nombreCurso) : nombreCurso(nombreCurso) {
     if(rht.nombreCurso == nombreCurso){
         estudiantes = rht.estudiantes;
     }
 }
 
+//funcion que destruye el curso, eliminando los estudiantes
 Curso::~Curso() {
     for (const auto& estudiante : estudiantes) {
         delete estudiante;
@@ -211,7 +231,7 @@ int main() {
             
                 Estudiante* estudianteEncontrado = nullptr;
             
-                // Buscar si el estudiante ya existe en algún curso
+                // Busco si el estudiante ya existe en algún curso
                 for (Curso* curso : cursos) {
                     for (Estudiante* estudiante : curso->getEstudiantes()) {
                         if (estudiante->getLegajo() == legajo) {
@@ -381,6 +401,7 @@ int main() {
     } while (opcion != 9);
     
     for (Curso* curso : cursos) {
+        curso->~Curso();
         delete curso;
     }
     cursos.clear();

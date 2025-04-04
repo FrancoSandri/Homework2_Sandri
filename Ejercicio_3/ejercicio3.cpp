@@ -1,6 +1,6 @@
 #include "ejercicio3.h"
 
-
+//funcion que suma dos numeros enteros
 Entero* Entero::suma(Numero* n) {
     Entero* nEntero = dynamic_cast<Entero*>(n);
     if (nEntero) {
@@ -9,6 +9,7 @@ Entero* Entero::suma(Numero* n) {
     return nullptr;
 }
 
+//funcion que resta dos numeros enteros
 Entero* Entero::resta(Numero* n){
     Entero* nEntero = dynamic_cast<Entero*>(n);
     if(nEntero){
@@ -17,6 +18,7 @@ Entero* Entero::resta(Numero* n){
     return nullptr;
 };
 
+//funcion que multiplica dos numeros enteros
 Entero* Entero::multiplicacion(Numero*n){
     Entero*nEntero = dynamic_cast<Entero*>(n);
     if(nEntero){
@@ -25,10 +27,12 @@ Entero* Entero::multiplicacion(Numero*n){
     return nullptr;
 }
 
+//funcion que convierte el entero a string
 string Entero::toString() const {
     return to_string(valor);
 }
 
+//funcion que suma dos numeros reales
 Real* Real::suma(Numero* n) {
     Real* nReal = dynamic_cast<Real*>(n);
     if (nReal) {
@@ -37,6 +41,7 @@ Real* Real::suma(Numero* n) {
     return nullptr;
 }
 
+//funcion que resta dos numeros reales
 Real* Real::resta(Numero* n){
     Real* nReal = dynamic_cast<Real*>(n);
     if(nReal){
@@ -45,6 +50,7 @@ Real* Real::resta(Numero* n){
     return nullptr;
 };
 
+//funcion que multiplica dos numeros reales
 Real* Real::multiplicacion(Numero*n){
     Real*nReal = dynamic_cast<Real*>(n);
     if(nReal){
@@ -53,10 +59,12 @@ Real* Real::multiplicacion(Numero*n){
     return nullptr;
 }
 
+//funcion que convierte el real a string
 string Real::toString() const {
     return to_string(valor);
 }
 
+//funcion que suma dos numeros complejos
 Complejo* Complejo::suma(Numero* n) {
     Complejo* nComplejo = dynamic_cast<Complejo*>(n);
     if (nComplejo) {
@@ -66,6 +74,7 @@ Complejo* Complejo::suma(Numero* n) {
     return nullptr;
 }
 
+//funcion que resta dos numeros complejos
 Complejo* Complejo::resta(Numero* n){
     Complejo* nComplejo = dynamic_cast<Complejo*>(n);
     if(nComplejo){
@@ -75,6 +84,7 @@ Complejo* Complejo::resta(Numero* n){
     return nullptr;
 };
 
+//funcion que multiplica dos numeros enteros
 Complejo* Complejo::multiplicacion(Numero*n){
     Complejo*nComplejo = dynamic_cast<Complejo*>(n);
     if(nComplejo){
@@ -84,6 +94,7 @@ Complejo* Complejo::multiplicacion(Numero*n){
     return nullptr;
 }
 
+//funcion que convierte el complejo a string
 string Complejo::toString() const {
     return to_string(real) + " + " + to_string(imaginario) + "i";
 }

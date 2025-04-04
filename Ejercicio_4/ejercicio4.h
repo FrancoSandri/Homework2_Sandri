@@ -41,3 +41,15 @@ class cuentaCorriente: public cuentaBanco{
 };
 
 #endif
+
+/*
+a) Establecer los especificadores de acceso (public, private y private) en los atributos y métodos de todas las clases, 
+explicando su elección en función de la seguridad y la flexibilidad para futuros requerimientos de cambio.
+
+Los atributos de las clases son privados, ya que no quiero que se puedan modificar desde afuera de la clase y que solo 
+se puedan acceder desde los métodos publicos de la misma. 
+Esto en función de seguridad, sirve para que no puedan modificar el balance de la cuenta, o el nombre de titular, o el tipo de cuenta que 
+son datos sensibles. Mientras que los métodos publicos son los que permiten interactuar con la clase, pudiendo acceder a esos atributos privados
+para realizar las operaciones necesarias. 
+
+*/
